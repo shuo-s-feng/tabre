@@ -1,0 +1,42 @@
+{
+  "id": "linkedin.com/single-step/typeahead-industries",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for industry typeahead.",
+      "example": "Software Development"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the industry typeahead API.",
+      "example": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c",
+      "default": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+    }
+  },
+  "request": {
+    "name": "TypeaheadIndustries",
+    "description": "Searches for industries based on keywords using LinkedIn's typeahead API.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(keywords:{{keywords}},query:(),type:INDUSTRY)",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "industryId": "list(body.data.searchDashReusableTypeaheadByType.elements, 'trackingUrn').replace('urn:li:industry:','')",
+      "industryName": "list(body.data.searchDashReusableTypeaheadByType.elements, 'title').text"
+    }
+  }
+}

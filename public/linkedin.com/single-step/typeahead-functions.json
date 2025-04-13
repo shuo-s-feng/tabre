@@ -1,0 +1,42 @@
+{
+  "id": "linkedin.com/single-step/typeahead-functions",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for function search.",
+      "example": "Information Technology"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the typeahead API.",
+      "example": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c",
+      "default": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+    }
+  },
+  "request": {
+    "name": "TypeaheadFunctions",
+    "description": "Searches for functions based on keywords using LinkedIn's typeahead API.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(keywords:{{keywords}},query:(),type:JOB_FUNCTION)",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "functionId": "list(body.data.searchDashReusableTypeaheadByType.elements, 'trackingUrn').replace('urn:li:jobFunction:','')",
+      "functionName": "list(body.data.searchDashReusableTypeaheadByType.elements, 'title').text"
+    }
+  }
+}

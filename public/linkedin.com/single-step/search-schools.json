@@ -1,0 +1,46 @@
+{
+  "id": "linkedin.com/single-step/search-schools",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for school search.",
+      "example": "Stanford University"
+    },
+    "start": {
+      "type": "number",
+      "description": "The start index for the school search.",
+      "example": 0
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the school search API.",
+      "example": "voyagerSearchDashClusters.994bf4e7d2173b92ccdb5935710c3c5d",
+      "default": "voyagerSearchDashClusters.994bf4e7d2173b92ccdb5935710c3c5d"
+    }
+  },
+  "request": {
+    "name": "SearchSchools",
+    "description": "Searches for schools based on keywords.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(start:{{start}},origin:GLOBAL_SEARCH_HEADER,query:(keywords:{{keywords}},flagshipSearchIntent:SEARCH_SRP,queryParameters:List((key:resultType,value:List(SCHOOLS))),includeFiltersInResponse:false))",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingJs": {
+      "code": "const isSchoolElement = (element) => {\n  return !!element?.items[0]?.item?.entityResult?.trackingUrn;\n};\n\nconst elements = response.body.data.searchDashClustersByAll.elements;\nlet schools = [];\n\nfor (const element of elements) {\n  if (isSchoolElement(element)) {\n    schools = element.items;\n    break;\n  }\n}\n\nif (!schools.length) {\n  return [];\n}\n\nreturn schools.map(({ item }) => {\n  const { entityResult } = item;\n\n  return {\n    schoolId: entityResult?.trackingUrn?.replace(\"urn:li:organization:\", \"\"),\n    schoolName: entityResult?.title?.text,\n    schoolLocation: entityResult?.primarySubtitle?.text,\n    schoolDescription: entityResult?.summary?.text,\n    schoolStudents: entityResult?.secondarySubtitle?.text?.replace(\n      \" students and alumni on LinkedIn\",\n      \"\"\n    ),\n    schoolInsights:\n      entityResult?.insightsResolutionResults[0]?.simpleInsight?.title?.text ||\n      \"\",\n    schoolUrl: entityResult?.navigationUrl,\n  };\n});"
+    }
+  }
+}

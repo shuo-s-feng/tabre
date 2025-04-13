@@ -1,0 +1,132 @@
+{
+  "id": "linkedin.com/single-step/search-jobs",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for job search.",
+      "example": "engineer"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "The LinkedIn location ID for the search area.",
+      "example": "90000049"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "The LinkedIn company ID for the search.",
+      "example": "1586"
+    },
+    "timePostedRange": {
+      "type": "string",
+      "description": "The time posted range for the search results. '1d' for 1 day, '1w' for 1 week, '1mo' for 1 month, '3mo' for 3 months, empty for any time.",
+      "example": "1d"
+    },
+    "jobType": {
+      "type": "string",
+      "description": "The job types for the search results. 'F' for full time, 'P' for part time, 'C' for contract, 'T' for temporary, 'V' for volunteer, 'I' for internship, 'O' for other.",
+      "example": "F"
+    },
+    "sortBy": {
+      "type": "string",
+      "description": "The sort order for the search results. 'DD' for most recent, 'R' for relevance.",
+      "example": "DD"
+    },
+    "applyWithLinkedIn": {
+      "type": "boolean",
+      "description": "Whether to apply with LinkedIn.",
+      "example": true
+    },
+    "commitment": {
+      "type": "number",
+      "description": "The commitments for the search results. '1' for diversity equity and inclusion, '2' for environmental sustainability, '3' for work life balance, '4' for social impact, '5' for career growth and learning.",
+      "example": 1
+    },
+    "distance": {
+      "type": "number",
+      "description": "The distance for the search results in miles.",
+      "example": 25
+    },
+    "expLevel": {
+      "type": "number",
+      "description": "The experience levels for the search results. '1' for internship, '2' for entry level, '3' for associate, '4' for mid senior level, '5' for director, '6' for executive.",
+      "example": 1
+    },
+    "earlyApplicant": {
+      "type": "boolean",
+      "description": "Whether to apply with LinkedIn.",
+      "example": true
+    },
+    "functionId": {
+      "type": "string",
+      "description": "The function ID for the search results.",
+      "example": "it"
+    },
+    "industryId": {
+      "type": "string",
+      "description": "The industry ID for the search results.",
+      "example": "1594"
+    },
+    "inYourNetwork": {
+      "type": "boolean",
+      "description": "Jobs in your network.",
+      "example": true
+    },
+    "populatedPlaceGeoId": {
+      "type": "string",
+      "description": "The populated place geo ID for the search results.",
+      "example": "90000049"
+    },
+    "salaryBucketV2": {
+      "type": "string",
+      "description": "The salary bucket for the search results.",
+      "example": "1"
+    },
+    "titleId": {
+      "type": "string",
+      "description": "The title ID for the search results.",
+      "example": "9"
+    },
+    "workplaceType": {
+      "type": "number",
+      "description": "The workplace type for the search results. 1 for onsite, 2 for remote, 3 for hybrid.",
+      "example": 1
+    },
+    "start": {
+      "type": "number",
+      "description": "The start for the search results.",
+      "example": 0
+    },
+    "count": {
+      "type": "number",
+      "description": "The count for the search results.",
+      "example": 25
+    },
+    "decorationId": {
+      "type": "string",
+      "description": "The decoration ID for the search results.",
+      "example": "com.linkedin.voyager.dash.deco.jobs.search.JobSearchCardsCollection-213"
+    }
+  },
+  "request": {
+    "name": "SearchJobs",
+    "description": "Searches for jobs based on keywords, location, and other filters.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/voyagerJobsDashJobCards",
+    "queryStringBuilder": "{{linkedin.com/search-jobs.buildSearchJobsQueryString()}}",
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "code": "const jobInfos = [];for (const job of response.body.elements) { const jobPostingCard = job?.jobCardUnion?.jobPostingCard; if (!jobPostingCard) { continue; } const jobId = jobPostingCard?.entityUrn .replace(\"urn:li:fsd_jobPostingCard:(\", \"\") .split(\",\")[0]; const jobTitle = jobPostingCard?.title?.text; const jobUrl = \"https://www.linkedin.com/jobs/view/\" + jobId; const jobCompany = jobPostingCard?.primaryDescription?.text; const jobInsight = jobPostingCard?.relevanceInsight?.text?.text; const jobLocation = jobPostingCard?.secondaryDescription?.text; const jobInfo = { jobId, jobTitle, jobUrl, jobCompany, jobInsight, jobLocation, }; jobInfos.push(jobInfo);}return jobInfos;"
+    }
+  }
+}

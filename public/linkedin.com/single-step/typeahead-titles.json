@@ -1,0 +1,42 @@
+{
+  "id": "linkedin.com/single-step/typeahead-titles",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for title search.",
+      "example": "Software Engineer"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the typeahead API.",
+      "example": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c",
+      "default": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+    }
+  },
+  "request": {
+    "name": "TypeaheadTitles",
+    "description": "Searches for titles based on keywords using LinkedIn's typeahead API.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(keywords:{{keywords}},query:(),type:TITLE)",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "titleId": "list(body.data.searchDashReusableTypeaheadByType.elements, 'trackingUrn').replace('urn:li:organization:','')",
+      "titleName": "list(body.data.searchDashReusableTypeaheadByType.elements, 'title').text"
+    }
+  }
+}

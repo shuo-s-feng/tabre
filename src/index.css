@@ -1,0 +1,17 @@
+/* Reference: https://stackoverflow.com/a/14205976 */
+/* Change auto fill background color to #F7F7F5 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #f7f7f5 inset !important;
+}
+
+html,
+body {
+  touch-action: none; /* Prevent touch interactions like scrolling for mobile devices */
+  -webkit-overflow-scrolling: touch; /* For smoother scrolling behavior where needed for mobile devices */
+  width: 100vw; /* Set your desired width */
+  height: 100vh; /* Set your desired height */
+  margin: 0;
+}

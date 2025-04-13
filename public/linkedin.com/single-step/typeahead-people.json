@@ -1,0 +1,44 @@
+{
+  "id": "linkedin.com/single-step/typeahead-people",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for people typeahead.",
+      "example": "Shuo Feng"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the people typeahead API.",
+      "example": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c",
+      "default": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+    }
+  },
+  "request": {
+    "name": "TypeaheadPeople",
+    "description": "Searches for people based on keywords using LinkedIn's typeahead API.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(keywords:{{keywords}},query:(),type:CONNECTIONS)",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "peopleId": "list(body.data.searchDashReusableTypeaheadByType.elements, 'trackingUrn').replace('urn:li:member:','')",
+      "peopleHashId": "list(body.data.searchDashReusableTypeaheadByType.elements, 'target').profile.entityUrn.replace('urn:li:fsd_profile:','')",
+      "peopleName": "list(body.data.searchDashReusableTypeaheadByType.elements, 'title').text",
+      "peopleSubtitle": "list(body.data.searchDashReusableTypeaheadByType.elements, 'subtitle').text"
+    }
+  }
+}

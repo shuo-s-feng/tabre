@@ -1,0 +1,44 @@
+{
+  "id": "linkedin.com/single-step/typeahead-general",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for general typeahead.",
+      "example": "Any"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the general typeahead API.",
+      "example": "voyagerSearchDashTypeahead.e2aad44974edcf1ef5db22e743e8f838",
+      "default": "voyagerSearchDashTypeahead.e2aad44974edcf1ef5db22e743e8f838"
+    }
+  },
+  "request": {
+    "name": "TypeaheadGeneral",
+    "description": "Typeahead search for matching entities.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(query:{{keywords}})",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "name": "list(body.data.searchDashTypeaheadByGlobalTypeahead.elements, 'entityLockupView').title.text",
+      "subtitle": "list(body.data.searchDashTypeaheadByGlobalTypeahead.elements, 'entityLockupView').subtitle.text",
+      "trackingUrn": "list(body.data.searchDashTypeaheadByGlobalTypeahead.elements, 'entityLockupView').trackingUrn",
+      "url": "list(body.data.searchDashTypeaheadByGlobalTypeahead.elements, 'entityLockupView').navigationUrl"
+    }
+  }
+}

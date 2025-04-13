@@ -1,0 +1,49 @@
+{
+  "id": "linkedin.com/single-step/get-user-profile",
+  "params": {
+    "publicIdOrHashId": {
+      "type": "string",
+      "description": "The public ID or hash ID of the member to fetch details for.",
+      "example": "shuo-feng"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The ID of the query to fetch details for.",
+      "example": "voyagerIdentityDashProfiles.13618f886ce95bf503079f49245fbd6f",
+      "default": "voyagerIdentityDashProfiles.13618f886ce95bf503079f49245fbd6f"
+    }
+  },
+  "request": {
+    "name": "GetUserDetails",
+    "description": "Fetches user details based on user ID.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(memberIdentity:{{publicIdOrHashId}})",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "firstName": "body.data.identityDashProfilesByMemberIdentity.elements.0.firstName",
+      "lastName": "body.data.identityDashProfilesByMemberIdentity.elements.0.lastName",
+      "memberId": "body.data.identityDashProfilesByMemberIdentity.elements.0.objectUrn.replace('urn:li:member:','')",
+      "hashId": "body.data.identityDashProfilesByMemberIdentity.elements.0.entityUrn.replace('urn:li:fsd_profile:','')",
+      "publicId": "body.data.identityDashProfilesByMemberIdentity.elements.0.publicIdentifier",
+      "emailAddress": "body.data.identityDashProfilesByMemberIdentity.elements.0.emailAddress.emailAddress",
+      "connectedAt": "body.data.identityDashProfilesByMemberIdentity.elements.0.memberRelationship.memberRelationshipDataResolutionResult.connection.createdAt",
+      "invitationType": "body.data.identityDashProfilesByMemberIdentity.elements.0.memberRelationship.memberRelationshipDataResolutionResult.invitation.invitationType",
+      "memberDistance": "body.data.identityDashProfilesByMemberIdentity.elements.0.memberRelationship.memberRelationship.noConnection.memberDistance"
+    }
+  }
+}

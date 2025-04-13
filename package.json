@@ -1,0 +1,58 @@
+{
+  "name": "tabre",
+  "private": false,
+  "version": "0.0.1",
+  "description": "A powerful web-based API definition and testing platform that enables you to define and play with API endpoints",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Shuo Feng",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuo/tabre.git"
+  },
+  "homepage": "https://github.com/shuo/tabre#readme",
+  "keywords": [],
+  "scripts": {
+    "dev": "vite",
+    "build": "yarn clean && tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "clean-all": "yarn clean && rm -rf node_modules"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fontsource/roboto": "^5.2.5",
+    "@mui/icons-material": "^7.0.2",
+    "@mui/material": "^7.0.1",
+    "geton": "^0.0.1",
+    "lodash": "^4.17.21",
+    "openai": "^4.91.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "string-width": "^7.2.0",
+    "tss-react": "^4.9.16"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/chrome": "^0.0.315",
+    "@types/lodash": "^4.17.16",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "chrome": "^0.1.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0",
+    "vite-plugin-checker": "^0.9.1"
+  }
+}

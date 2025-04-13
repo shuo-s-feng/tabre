@@ -1,0 +1,42 @@
+{
+  "id": "linkedin.com/single-step/typeahead-locations",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for location typeahead. Do not use abbreviations like USA (country), LA (city), etc.",
+      "example": "Los Angeles, United States"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the location typeahead API.",
+      "example": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c",
+      "default": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+    }
+  },
+  "request": {
+    "name": "TypeaheadLocations",
+    "description": "Searches for locations based on keywords using LinkedIn's typeahead API.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(keywords:{{keywords}},query:(typeaheadFilterQuery:(geoSearchTypes:List(POSTCODE_1,POSTCODE_2,POPULATED_PLACE,ADMIN_DIVISION_1,ADMIN_DIVISION_2,COUNTRY_REGION,MARKET_AREA,COUNTRY_CLUSTER)),typeaheadUseCase:JOBS),type:GEO)",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "locationIds": "list(body.data.searchDashReusableTypeaheadByType.elements, 'trackingUrn').replace('urn:li:geo:','')",
+      "locationNames": "list(body.data.searchDashReusableTypeaheadByType.elements, 'title').text"
+    }
+  }
+}

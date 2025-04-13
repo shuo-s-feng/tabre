@@ -1,0 +1,66 @@
+{
+  "id": "linkedin.com/single-step/get-company-details",
+  "params": {
+    "publicId": {
+      "type": "string",
+      "description": "The public ID of the company.",
+      "example": "amazon"
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the search companies API.",
+      "example": "voyagerOrganizationDashCompanies.14020cba5d6e7118597eb6a8f5727a35",
+      "default": "voyagerOrganizationDashCompanies.14020cba5d6e7118597eb6a8f5727a35"
+    }
+  },
+  "request": {
+    "name": "GetCompanyDetails",
+    "description": "Gets company details based on keywords.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(universalName:{{publicId}})",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "companyId": "body.data.organizationDashCompaniesByUniversalName.elements.0.entityUrn.replace('urn:li:fsd_company:', '')",
+      "companyPublicId": "body.data.organizationDashCompaniesByUniversalName.elements.0.universalName",
+      "companyName": "body.data.organizationDashCompaniesByUniversalName.elements.0.name",
+      "companyDescription": "body.data.organizationDashCompaniesByUniversalName.elements.0.description",
+      "companyActive": "body.data.organizationDashCompaniesByUniversalName.elements.0.active",
+      "companyVerified": "body.data.organizationDashCompaniesByUniversalName.elements.0.pageVerification.verified",
+      "companyFollowerCount": "body.data.organizationDashCompaniesByUniversalName.elements.0.followingState.followerCount",
+      "companyEmployeeInLinkedInCount": "body.data.organizationDashCompaniesByUniversalName.elements.0.employeeCount",
+      "companyEmployeeCountRangeStart": "body.data.organizationDashCompaniesByUniversalName.elements.0.employeeCountRange.start",
+      "companyEmployeeCountRangeEnd": "body.data.organizationDashCompaniesByUniversalName.elements.0.employeeCountRange.end",
+
+      "companyLinkedinUrl": "body.data.organizationDashCompaniesByUniversalName.elements.0.url",
+      "companyUrl": "body.data.organizationDashCompaniesByUniversalName.elements.0.websiteUrl",
+      "companyCallToAction": "body.data.organizationDashCompaniesByUniversalName.elements.0.callToAction.url",
+
+      "companyIndustry": "body.data.organizationDashCompaniesByUniversalName.elements.0.industryV2Taxonomy.0.name",
+      "companySpecialities": "body.data.organizationDashCompaniesByUniversalName.elements.0.specialities",
+      "companyHeadquarterCountry": "body.data.organizationDashCompaniesByUniversalName.elements.0.headquarter.address.country",
+      "companyHeadquarterGeographicArea": "body.data.organizationDashCompaniesByUniversalName.elements.0.headquarter.address.geographicArea",
+      "companyHeadquarterCity": "body.data.organizationDashCompaniesByUniversalName.elements.0.headquarter.address.city",
+      "companyHeadquarterPostalCode": "body.data.organizationDashCompaniesByUniversalName.elements.0.headquarter.address.postalCode",
+      "companyHeadquarterLine1": "body.data.organizationDashCompaniesByUniversalName.elements.0.headquarter.address.line1",
+      "companyHeadquarterLine2": "body.data.organizationDashCompaniesByUniversalName.elements.0.headquarter.address.line2",
+      "companyFoundedOn": "body.data.organizationDashCompaniesByUniversalName.elements.0.foundedOn.year",
+      "companyLocation": "body.data.organizationDashCompaniesByUniversalName.elements.0.location.address.city",
+      "companyCrunchbaseUrl": "body.data.organizationDashCompaniesByUniversalName.elements.0.crunchbaseFundingData.organizationUrl"
+    }
+  }
+}
