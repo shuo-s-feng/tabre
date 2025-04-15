@@ -30,7 +30,10 @@ export const MessageWithSteps: React.FC<MessageWithStepsProps> = ({
       </Box>
 
       {message.intermediateSteps && message.intermediateSteps.length > 0 && (
-        <IntermediateStepsDisplay steps={message.intermediateSteps} />
+        <IntermediateStepsDisplay
+          steps={message.intermediateSteps}
+          isProcessing={false}
+        />
       )}
 
       <Paper

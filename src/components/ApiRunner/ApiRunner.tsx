@@ -211,11 +211,16 @@ export const ApiRunner: React.FC<ApiRunnerProps> = ({
                 />
               </Box>
             ) : (
-              <Alert severity="info">
-                <Typography>
-                  Please enter a valid request definition in the DEFINITION tab
-                </Typography>
-              </Alert>
+              <Box>
+                {definitionSelector}
+
+                <Alert severity="info">
+                  <Typography>
+                    Please enter a valid request definition in the DEFINITION
+                    tab
+                  </Typography>
+                </Alert>
+              </Box>
             ),
           },
           {

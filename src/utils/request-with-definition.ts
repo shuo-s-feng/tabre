@@ -205,11 +205,11 @@ export const requestWithDefinition = async (
       "Error: Could not establish connection. Receiving end does not exist."
     ) {
       throw new Error(
-        `Error: Could not establish connection. You might need to refresh the tab(s) matching ${tabQuery.url} .`
+        `Could not establish connection. You might need to refresh the tab(s) matching ${tabQuery.url} .`
       );
     } else if (response === "Error: No active tab found.") {
       throw new Error(
-        `Error: No active tab found. You might need to open a tab matching ${tabQuery.url} .`
+        `No active tab found. You might need to open a tab matching ${tabQuery.url} .`
       );
     }
 

@@ -16,18 +16,17 @@ const MAX_TOOLTIP_TEXT_LENGTH = 100;
 
 export interface IntermediateStepsDisplayProps {
   steps: IntermediateStep[];
+  isProcessing: boolean;
 }
 
 export const IntermediateStepsDisplay: React.FC<
   IntermediateStepsDisplayProps
-> = ({ steps }) => {
+> = ({ steps, isProcessing = false }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (steps.length === 0) return null;
 
   const latestStep = steps[steps.length - 1];
-  const isProcessing =
-    latestStep.type === "thinking" || latestStep.type === "tool_call";
 
   return (
     <Paper
@@ -56,7 +55,7 @@ export const IntermediateStepsDisplay: React.FC<
               sx={{
                 display: "flex",
                 alignItems: "center",
-                pl: 2,
+                pl: 4,
                 height: 34,
                 borderLeft: "2px solid",
                 borderColor: "divider",

@@ -4,12 +4,12 @@
     "keywords": {
       "type": "string",
       "description": "The search keywords for job search.",
-      "example": "engineer"
+      "example": "Software Engineer"
     },
     "locationId": {
       "type": "string",
       "description": "The LinkedIn location ID for the search area.",
-      "example": "90000049"
+      "example": "103644278"
     },
     "companyId": {
       "type": "string",
@@ -19,7 +19,7 @@
     "timePostedRange": {
       "type": "string",
       "description": "The time posted range for the search results. '1d' for 1 day, '1w' for 1 week, '1mo' for 1 month, '3mo' for 3 months, empty for any time.",
-      "example": "1d"
+      "example": "1mo"
     },
     "jobType": {
       "type": "string",
@@ -34,7 +34,7 @@
     "applyWithLinkedIn": {
       "type": "boolean",
       "description": "Whether to apply with LinkedIn.",
-      "example": true
+      "example": false
     },
     "commitment": {
       "type": "number",
@@ -49,12 +49,12 @@
     "expLevel": {
       "type": "number",
       "description": "The experience levels for the search results. '1' for internship, '2' for entry level, '3' for associate, '4' for mid senior level, '5' for director, '6' for executive.",
-      "example": 1
+      "example": 2
     },
     "earlyApplicant": {
       "type": "boolean",
       "description": "Whether to apply with LinkedIn.",
-      "example": true
+      "example": false
     },
     "functionId": {
       "type": "string",
@@ -64,21 +64,21 @@
     "industryId": {
       "type": "string",
       "description": "The industry ID for the search results.",
-      "example": "1594"
+      "example": "4"
     },
     "inYourNetwork": {
       "type": "boolean",
       "description": "Jobs in your network.",
-      "example": true
+      "example": false
     },
     "populatedPlaceGeoId": {
       "type": "string",
       "description": "The populated place geo ID for the search results.",
-      "example": "90000049"
+      "example": "103644278"
     },
     "salaryBucketV2": {
       "type": "string",
-      "description": "The salary bucket for the search results.",
+      "description": "The salary bucket for the search results. '1' for $40,000+, '2' for $60,000+, '3' for $80,000+, '4' for $100,000+, '5' for $120,000+, '6' for $140,000+, '7' for $160,000+, '8' for $180,000+, '9' for $200,000+.",
       "example": "1"
     },
     "titleId": {

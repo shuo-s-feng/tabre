@@ -10,6 +10,8 @@ import {
   Divider,
   IconButton,
   Tooltip,
+  Alert,
+  Stack,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { ChatSettings } from "./ChatSettings";
@@ -79,6 +81,12 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
   );
 
   const onMessageSend = useCallback(async () => {
+    if (!apiKey) {
+      setSettingsOpen(true);
+      setIsLoading(false);
+      return;
+    }
+
     if (!input.trim() || isLoading || !definitions) return;
 
     const userMessage: Message = {
@@ -91,12 +99,6 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
     setInput("");
     setIsLoading(true);
     setIntermediateSteps([]);
-
-    if (!apiKey) {
-      setSettingsOpen(true);
-      setIsLoading(false);
-      return;
-    }
 
     try {
       const latestMessages = [...messages, userMessage];
@@ -124,7 +126,7 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
           {
             role: "system",
             content: ` 1. If the tool call failed, never make up a response, just say that the tool call failed. 
-              2. When finding referrers, first generate the search keywords based on the JD, where the search keywords can be the team name, org name, product name, etc. Then use this as keywords to search the matching people.
+              2. When finding referrers, first generate the search keywords based on the JD, where the search keywords can be the team name, org name, product name, etc. Never use the company name. Then use this as keywords to search the matching people.
               3. When searching the people, first try with keywords, locationName, currentCompanyName, schoolName.`,
           },
 
@@ -246,10 +248,26 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
                     output: responseContent,
                   });
                 } catch (error) {
+                  console.error(
+                    "Failed to execute request with definition:",
+                    error
+                  );
+
+                  setIntermediateSteps((prev) => [
+                    ...prev,
+                    {
+                      type: "tool_response",
+                      content: `Error: Failed to execute request with definition: ${definitionId} with ${String(
+                        error
+                      )}`,
+                      timestamp: Date.now(),
+                    },
+                  ]);
+
                   messagesInput.push({
                     type: "message",
                     role: "developer",
-                    content: `Failed to execute request with definition: ${definitionId} with error: ${String(
+                    content: `Failed to execute request with definition: ${definitionId} with ${String(
                       error
                     )}`,
                   });
@@ -375,6 +393,10 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
     setSettingsOpen(false);
   }, []);
 
+  const onConversationStarterClick = useCallback((prompt: string) => {
+    setInput(prompt);
+  }, []);
+
   return (
     <Paper
       elevation={2}
@@ -415,6 +437,23 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
         </Tooltip>
       </Box>
       <Box sx={{ flex: 1, overflow: "auto", p: 2 }}>
+        {!apiKey.startsWith("sk-") && (
+          <Alert
+            severity="warning"
+            sx={{ mb: 2 }}
+            action={
+              <Button color="inherit" size="small" onClick={onSettingsOpen}>
+                Add API Key
+              </Button>
+            }
+          >
+            <Typography>
+              API key is missing. Please add your API key in settings to use the
+              chat.
+            </Typography>
+          </Alert>
+        )}
+
         <List>
           {messages.map((message, index) => (
             <React.Fragment key={message.id}>
@@ -432,12 +471,39 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
           ))}
           {isLoading && (
             <ListItem>
-              <IntermediateStepsDisplay steps={intermediateSteps} />
+              <IntermediateStepsDisplay
+                steps={intermediateSteps}
+                isProcessing={true}
+              />
             </ListItem>
           )}
         </List>
       </Box>
+
       <Box sx={{ p: 2, borderTop: 1, borderColor: "divider" }}>
+        {messages.length === 0 && (
+          <Stack direction="row" spacing={2} sx={{ p: 2, mb: 1 }}>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                onConversationStarterClick(
+                  "Find me some SDE openings in the United States"
+                )
+              }
+            >
+              Find SDE openings in US
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                onConversationStarterClick("Find me some insiders at Amazon")
+              }
+            >
+              Find Amazon insiders
+            </Button>
+          </Stack>
+        )}
+
         <Box sx={{ display: "flex", gap: 1 }}>
           <TextField
             fullWidth
@@ -450,6 +516,7 @@ export const Chat: React.FC<ChatProps> = ({ className }) => {
             disabled={isLoading}
           />
           <Button
+            size="large"
             variant="contained"
             onClick={onMessageSend}
             disabled={isLoading || !input.trim()}

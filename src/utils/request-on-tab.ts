@@ -42,6 +42,10 @@ export const sendRequestOnTab = async (
     },
   };
 
+  if (!chrome?.runtime?.sendMessage) {
+    throw new Error("Chrome runtime is not available");
+  }
+
   return chrome.runtime
     .sendMessage(EXTENSION_ID, message)
     .then((response) => response.payload);

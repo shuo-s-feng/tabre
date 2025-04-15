@@ -16,6 +16,7 @@ import {
   requestWithDefinition,
 } from "../../utils/request-with-definition";
 import { ResponseViewer } from "../ResponseViewer";
+import { ChromeExtensionWarning } from "./ChromeExtensionWarning";
 
 const useStyles = makeStyles()((theme) => ({
   paper: {
@@ -63,6 +64,7 @@ export const SingleApiRunner: React.FC<SingleApiRunnerProps> = ({
   const [parsedResponse, setParsedResponse] = useState<
     Record<string, unknown> | string | undefined
   >();
+  const [showExtensionWarning, setShowExtensionWarning] = useState(false);
 
   const onParamChange = useCallback(
     (paramName: string, value: string) => {
@@ -90,6 +92,7 @@ export const SingleApiRunner: React.FC<SingleApiRunnerProps> = ({
   const onRequestSend = useCallback(async () => {
     setResponseIsLoading(true);
     setResponseHasError(false);
+    setShowExtensionWarning(false);
 
     try {
       const { responseString } = await requestWithDefinition(
@@ -102,11 +105,21 @@ export const SingleApiRunner: React.FC<SingleApiRunnerProps> = ({
       setResponseIsLoading(false);
       setResponseHasError(false);
     } catch (error) {
-      console.error("Error sending request:", error);
-      setResponse(error instanceof Error ? error.message : String(error));
-      onResponseChange?.(
-        error instanceof Error ? error.message : String(error)
-      );
+      let errorMessage = error instanceof Error ? error.message : String(error);
+
+      console.error("Error sending request:", errorMessage);
+
+      if (
+        errorMessage ===
+          "Could not establish connection. Receiving end does not exist." ||
+        errorMessage === "Chrome runtime is not available"
+      ) {
+        setShowExtensionWarning(true);
+        errorMessage = `Error: You might need to install the Chrome extension and refresh/open the tab(s) matching ${definition.request.queryTab?.url} .`;
+      }
+
+      setResponse(errorMessage);
+      onResponseChange?.(errorMessage);
       setResponseIsLoading(false);
       setResponseHasError(true);
     }
@@ -161,6 +174,10 @@ export const SingleApiRunner: React.FC<SingleApiRunnerProps> = ({
         <Typography variant="body1" className={classes.description}>
           {definition.request.description}
         </Typography>
+
+        {showExtensionWarning && (
+          <ChromeExtensionWarning url={definition.request.queryTab?.url} />
+        )}
 
         <Grid container direction="row" gap={2}>
           {Object.entries(definition.params).map(([paramName, paramDef]) => (

@@ -89,7 +89,6 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none", // To avoid uppercase text transformation
-          backgroundColor: "transparent",
         },
         containedPrimary: {
           backgroundColor: "#191919", // Primary button background color

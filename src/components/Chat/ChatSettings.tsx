@@ -37,7 +37,6 @@ export const ChatSettings: React.FC<ChatSettingsProps> = ({
           </Typography>
           <TextField
             fullWidth
-            type="password"
             label="OpenAI API Key"
             value={apiKey}
             onChange={(e) => onApiKeyChange(e.target.value)}

@@ -8,16 +8,6 @@ A powerful web-based API definition and testing platform that enables you to def
 - Transform and chain API calls with preprocessing capabilities
 - Access browser context (cookies, localStorage) in your API calls but no worry about leaks as they remain in the original tab
 
-Feel free to try out the [demo](https://app.tabre.org/).
-
-## Features
-
-- Built with React 19 and TypeScript
-- Material UI components with Emotion styling
-- Markdown support with KaTeX math rendering
-- OpenAI integration
-- Powerful API definition system
-
 ## Getting Started
 
 1. Install the Chrome Extension:
@@ -26,24 +16,23 @@ Feel free to try out the [demo](https://app.tabre.org/).
    - Click "Add to Chrome" to install the extension
    - This extension is required to make requests on behalf of your browser tabs
 
-2. Clone the repository:
+2. Try out the [demo](https://demo.tabre.org/) to see Tabre in action
 
-```bash
-git clone https://github.com/yourusername/tabre.git
-cd tabre
-```
+3. For local development:
+   ```bash
+   git clone https://github.com/shuo-s-feng/tabre.git
+   cd tabre
+   yarn install
+   yarn dev
+   ```
 
-3. Install dependencies:
+## Features
 
-```bash
-yarn install
-```
-
-4. Start the development server:
-
-```bash
-yarn dev
-```
+- Built with React 19 and TypeScript
+- Material UI components with Emotion styling
+- Markdown support with KaTeX math rendering
+- OpenAI integration
+- Powerful API definition system
 
 ## Project Structure
 
@@ -77,22 +66,9 @@ Tabre provides a powerful API definition system that allows you to create and ma
 - **Parameter Preprocessing**: Transform input parameters using other API calls
 - **Custom Request Handling**: Define custom query string builders and request methods
 - **Flexible Response Parsing**: Parse responses using config-based or custom JavaScript
-- **Tab Context Injection**: Access browser context like cookies and localStorage
-- **Multi-step API Support**: Chain multiple API calls together
+- **Tab Context Injection**: Access browser context like cookies and local storage
 
 For detailed documentation on creating API definitions, see [API.md](docs/API.md).
-
-## Development
-
-This project uses:
-
-- Vite for fast development and building
-- TypeScript for type safety
-- ESLint for code quality
-- Material UI for components
-- Emotion for styled components
-- React Markdown with KaTeX for math rendering
-- [geton](https://github.com/shuo-s-feng/geton) for data extraction and transformation
 
 ## License
 

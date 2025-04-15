@@ -77,8 +77,7 @@ Each API endpoint is defined in a JSON file with the following structure:
   "response": {
     "successfulStatusCodes": [200],
     "parsingConfig": {
-      "fieldName": "path.to.value",
-      "nestedField": "response.data.items.0.name"
+      "fieldName": "path.to.value"
     },
     "parsingJs": {
       "code": "custom-js-(not-ts)-code"
@@ -243,7 +242,7 @@ Example:
 
 In this case, the parameters get used only in query parameters.
 
-For demonstration about `{{cs_jsonParse(cookies.JSESSIONID)}}`, please refer to the following `Tab-related Context Injection` section.
+For demonstration about `{{cs_jsonParse(cookies.JSESSIONID)}}`, please refer to the [Tab-related Context Injection](#tab-related-context-injection) section.
 
 #### Custom Mode
 
@@ -330,8 +329,7 @@ Define how to parse the response via `parsingConfig`:
 "response": {
   "successfulStatusCodes": [200],
   "parsingConfig": {
-    "fieldName": "path.to.value",
-    "nestedField": "response.data.items.0.name"
+    "fieldName": "path.to.value"
   }
 }
 ```
