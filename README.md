@@ -16,7 +16,7 @@ A powerful web-based API definition and testing platform that enables you to def
    - Click "Add to Chrome" to install the extension
    - This extension is required to make requests on behalf of your browser tabs
 
-2. Try out the [demo](https://demo.tabre.org/) to see Tabre in action
+2. Try out the [demo](https://shuo-s-feng.github.io/tabre/) to see Tabre in action
 
 3. For local development:
    ```bash
