@@ -6,7 +6,7 @@
       "description": "The public ID of the company.",
       "example": "Amazon",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/search-companies",
+        "endpoint": "linkedin.com/single-step/search-companies",
         "params": {
           "keywords": "{{companyName}}",
           "start": 0,

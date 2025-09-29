@@ -12,7 +12,7 @@
       "description": "The location name to search for jobs in. This will be converted to a LinkedIn location ID using the typeahead locations API.  Do not use or include abbreviations like USA (country), LA (city), etc., and use the full name instead, like United States, Los Angeles, etc.",
       "example": "Los Angeles, United States",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-locations",
+        "endpoint": "linkedin.com/single-step/typeahead-locations",
         "params": {
           "keywords": "{{locationName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -27,7 +27,7 @@
       "description": "Company name to filter by current company. This will be converted to a LinkedIn company ID using the typeahead companies API.",
       "example": "Amazon",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-companies",
+        "endpoint": "linkedin.com/single-step/typeahead-companies",
         "params": {
           "keywords": "{{currentCompanyName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -42,7 +42,7 @@
       "description": "Company name to filter by past company. This will be converted to a LinkedIn company ID using the typeahead companies API.",
       "example": "Amazon",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-companies",
+        "endpoint": "linkedin.com/single-step/typeahead-companies",
         "params": {
           "keywords": "{{pastCompanyName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -57,7 +57,7 @@
       "description": "Industry name to filter by. This will be converted to a LinkedIn industry ID using the typeahead industries API.",
       "example": "Software Engineering",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-industries",
+        "endpoint": "linkedin.com/single-step/typeahead-industries",
         "params": {
           "keywords": "{{industryName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -77,7 +77,7 @@
       "description": "Person name to find connections of. This will be converted to a LinkedIn person ID using the typeahead people API.",
       "example": "Shuo Feng",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-people",
+        "endpoint": "linkedin.com/single-step/typeahead-people",
         "params": {
           "keywords": "{{connectionOf}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -91,7 +91,7 @@
       "description": "Person name to find followers of. This will be converted to a LinkedIn person ID using the typeahead people API.",
       "example": "Shuo Feng",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-people",
+        "endpoint": "linkedin.com/single-step/typeahead-people",
         "params": {
           "keywords": "{{followerOf}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -117,7 +117,7 @@
       "description": "School name to filter by. This will be converted to a LinkedIn school ID using the typeahead schools API.",
       "example": "University of Southern California",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-schools",
+        "endpoint": "linkedin.com/single-step/typeahead-schools",
         "params": {
           "keywords": "{{schoolName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -132,7 +132,7 @@
       "description": "Service category name to filter by. This will be converted to a LinkedIn service category ID using the typeahead service categories API.",
       "example": "Software Development",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-service-categories",
+        "endpoint": "linkedin.com/single-step/typeahead-service-categories",
         "params": {
           "keywords": "{{serviceCategoryName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"

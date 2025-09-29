@@ -11,7 +11,7 @@
       "description": "The location name to search for jobs in. This will be converted to a LinkedIn location ID using the typeahead locations API.  Do not use or include abbreviations like USA (country), LA (city), etc., and use the full name instead, like United States, Los Angeles, etc.",
       "example": "United States",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-locations",
+        "endpoint": "linkedin.com/single-step/typeahead-locations",
         "params": {
           "keywords": "{{locationName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -26,7 +26,7 @@
       "description": "Company name to filter by current company. This will be converted to a LinkedIn company ID using the typeahead companies API.",
       "example": "Amazon",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-companies",
+        "endpoint": "linkedin.com/single-step/typeahead-companies",
         "params": {
           "keywords": "{{companyName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -81,7 +81,7 @@
       "description": "The function name to filter by. This will be converted to a LinkedIn function ID using the typeahead functions API.",
       "example": "Software Engineer",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-functions",
+        "endpoint": "linkedin.com/single-step/typeahead-functions",
         "params": {
           "keywords": "{{functionName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -96,7 +96,7 @@
       "description": "Industry name to filter by. This will be converted to a LinkedIn industry ID using the typeahead industries API.",
       "example": "Software Engineering",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-industries",
+        "endpoint": "linkedin.com/single-step/typeahead-industries",
         "params": {
           "keywords": "{{industryName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -116,7 +116,7 @@
       "description": "The populated place name to filter by. This will be converted to a LinkedIn populated place geo ID using the typeahead locations API.",
       "example": "United States",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-locations",
+        "endpoint": "linkedin.com/single-step/typeahead-locations",
         "params": {
           "keywords": "{{populatedPlaceName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
@@ -136,7 +136,7 @@
       "description": "The title name to filter by. This will be converted to a LinkedIn title ID using the typeahead titles API.",
       "example": "Software Engineer",
       "preprocess": {
-        "endpoint": "/linkedin.com/single-step/typeahead-titles",
+        "endpoint": "linkedin.com/single-step/typeahead-titles",
         "params": {
           "keywords": "{{titleName}}",
           "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
