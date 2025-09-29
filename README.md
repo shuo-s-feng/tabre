@@ -68,7 +68,7 @@ Tabre provides a powerful API definition system that allows you to create and ma
 - **Flexible Response Parsing**: Parse responses using config-based or custom JavaScript
 - **Tab Context Injection**: Access browser context like cookies and local storage
 
-For detailed documentation on creating API definitions, see [API.md](docs/API.md).
+For detailed documentation on creating API definitions, see [API.md](API.md).
 
 ## License
 

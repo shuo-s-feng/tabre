@@ -14,7 +14,7 @@
   "keywords": [],
   "scripts": {
     "dev": "vite",
-    "build": "yarn clean && tsc -b && vite build",
+    "build": "yarn clean && tsc -b && vite build && mkdir -p docs && cp -R dist/. docs/",
     "lint": "eslint .",
     "preview": "vite preview",
     "clean": "rm -rf dist",

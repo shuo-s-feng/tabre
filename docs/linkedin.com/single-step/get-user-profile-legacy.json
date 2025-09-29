@@ -1,0 +1,42 @@
+{
+  "id": "linkedin.com/single-step/get-user-profile-legacy",
+  "params": {
+    "publicIdOrHashId": {
+      "type": "string",
+      "description": "The public ID or hash ID of the member to fetch details for.",
+      "example": "ACoAABti4oUBViIxC7aw5ujPX1ehf9eeIxI59zc"
+    }
+  },
+  "request": {
+    "name": "GetUserDetails",
+    "description": "Fetches user details based on user ID.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/identity/profiles/{{publicIdOrHashId}}/profileView",
+    "queryParameters": {},
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingConfig": {
+      "memberId": "body.profile.miniProfile.objectUrn.replace('urn:li:member:', '')",
+      "publicId": "body.profile.miniProfile.publicIdentifier",
+      "hashId": "body.profile.entityUrn.replace('urn:li:fs_profile:', '')",
+      "firstName": "body.profile.firstName",
+      "lastName": "body.profile.lastName",
+      "industryName": "body.profile.industryName",
+      "locationName": "body.profile.locationName",
+      "student": "body.profile.student",
+      "geoCountryName": "body.profile.geoCountryName",
+      "geoLocationName": "body.profile.geoLocationName",
+      "headline": "body.profile.headline"
+    }
+  }
+}

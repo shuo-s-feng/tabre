@@ -1,0 +1,192 @@
+{
+  "id": "linkedin.com/multiple-steps/search-jobs",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for job search.",
+      "example": "Software Engineer"
+    },
+    "locationName": {
+      "type": "string",
+      "description": "The location name to search for jobs in. This will be converted to a LinkedIn location ID using the typeahead locations API.  Do not use or include abbreviations like USA (country), LA (city), etc., and use the full name instead, like United States, Los Angeles, etc.",
+      "example": "United States",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-locations",
+        "params": {
+          "keywords": "{{locationName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "locationIds.0",
+        "newKey": "locationId"
+      },
+      "required": true
+    },
+    "companyName": {
+      "type": "string",
+      "description": "Company name to filter by current company. This will be converted to a LinkedIn company ID using the typeahead companies API.",
+      "example": "Amazon",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-companies",
+        "params": {
+          "keywords": "{{companyName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "companyId.0",
+        "newKey": "companyId"
+      },
+      "required": false
+    },
+    "timePostedRange": {
+      "type": "string",
+      "description": "The time posted range for the search results. '1d' for 1 day, '1w' for 1 week, '1mo' for 1 month, '3mo' for 3 months, empty for any time.",
+      "example": "1mo"
+    },
+    "jobType": {
+      "type": "string",
+      "description": "The job types for the search results. 'F' for full time, 'P' for part time, 'C' for contract, 'T' for temporary, 'V' for volunteer, 'I' for internship, 'O' for other.",
+      "example": "F"
+    },
+    "sortBy": {
+      "type": "string",
+      "description": "The sort order for the search results. 'DD' for most recent, 'R' for relevance.",
+      "example": "DD"
+    },
+    "applyWithLinkedIn": {
+      "type": "boolean",
+      "description": "Whether to apply with LinkedIn.",
+      "example": false
+    },
+    "commitment": {
+      "type": "number",
+      "description": "The commitments for the search results. '1' for diversity equity and inclusion, '2' for environmental sustainability, '3' for work life balance, '4' for social impact, '5' for career growth and learning.",
+      "example": 1
+    },
+    "distance": {
+      "type": "number",
+      "description": "The distance for the search results in miles.",
+      "example": 25
+    },
+    "expLevel": {
+      "type": "number",
+      "description": "The experience levels for the search results. '1' for internship, '2' for entry level, '3' for associate, '4' for mid senior level, '5' for director, '6' for executive.",
+      "example": 2
+    },
+    "earlyApplicant": {
+      "type": "boolean",
+      "description": "Whether to apply with LinkedIn.",
+      "example": false
+    },
+    "functionName": {
+      "type": "string",
+      "description": "The function name to filter by. This will be converted to a LinkedIn function ID using the typeahead functions API.",
+      "example": "Software Engineer",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-functions",
+        "params": {
+          "keywords": "{{functionName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "functionId.0",
+        "newKey": "functionId"
+      },
+      "required": false
+    },
+    "industryName": {
+      "type": "string",
+      "description": "Industry name to filter by. This will be converted to a LinkedIn industry ID using the typeahead industries API.",
+      "example": "Software Engineering",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-industries",
+        "params": {
+          "keywords": "{{industryName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "industryId.0",
+        "newKey": "industryId"
+      },
+      "required": false
+    },
+    "inYourNetwork": {
+      "type": "boolean",
+      "description": "Jobs in your network.",
+      "example": false
+    },
+    "populatedPlaceName": {
+      "type": "string",
+      "description": "The populated place name to filter by. This will be converted to a LinkedIn populated place geo ID using the typeahead locations API.",
+      "example": "United States",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-locations",
+        "params": {
+          "keywords": "{{populatedPlaceName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "locationIds.0",
+        "newKey": "locationIds"
+      },
+      "required": false
+    },
+    "salaryBucketV2": {
+      "type": "string",
+      "description": "The salary bucket for the search results. '1' for $40,000+, '2' for $60,000+, '3' for $80,000+, '4' for $100,000+, '5' for $120,000+, '6' for $140,000+, '7' for $160,000+, '8' for $180,000+, '9' for $200,000+.",
+      "example": "1"
+    },
+    "titleName": {
+      "type": "string",
+      "description": "The title name to filter by. This will be converted to a LinkedIn title ID using the typeahead titles API.",
+      "example": "Software Engineer",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-titles",
+        "params": {
+          "keywords": "{{titleName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "titleId.0",
+        "newKey": "titleId"
+      },
+      "required": false
+    },
+    "workplaceType": {
+      "type": "number",
+      "description": "The workplace type for the search results. 1 for onsite, 2 for remote, 3 for hybrid.",
+      "example": 1
+    },
+    "start": {
+      "type": "number",
+      "description": "The start for the search results.",
+      "example": 0
+    },
+    "count": {
+      "type": "number",
+      "description": "The count for the search results.",
+      "example": 25
+    },
+    "decorationId": {
+      "type": "string",
+      "description": "The decoration ID for the search results.",
+      "example": "com.linkedin.voyager.dash.deco.jobs.search.JobSearchCardsCollection-213"
+    }
+  },
+  "request": {
+    "name": "SearchJobs",
+    "description": "Searches for jobs based on keywords, location, and other filters.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/voyagerJobsDashJobCards",
+    "queryStringBuilder": "{{linkedin.com/search-jobs.buildSearchJobsQueryString()}}",
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingJs": {
+      "code": "const jobInfos = [];for (const job of response.body.elements) { const jobPostingCard = job?.jobCardUnion?.jobPostingCard; if (!jobPostingCard) { continue; } const jobId = jobPostingCard?.entityUrn .replace(\"urn:li:fsd_jobPostingCard:(\", \"\") .split(\",\")[0]; const jobTitle = jobPostingCard?.title?.text; const jobUrl = \"https://www.linkedin.com/jobs/view/\" + jobId; const jobCompany = jobPostingCard?.primaryDescription?.text; const jobInsight = jobPostingCard?.relevanceInsight?.text?.text; const jobLocation = jobPostingCard?.secondaryDescription?.text; const jobInfo = { jobId, jobTitle, jobUrl, jobCompany, jobInsight, jobLocation, }; jobInfos.push(jobInfo);}return jobInfos;"
+    }
+  }
+}

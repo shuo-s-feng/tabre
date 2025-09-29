@@ -1,0 +1,205 @@
+{
+  "id": "linkedin.com/multiple-steps/search-people",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for people search. Keywords should be quoted and separated by 'OR' operator. Should not include more than 2 keywords.",
+      "example": "\"Software Engineer\" OR \"Data Engineer\"",
+      "required": true
+    },
+    "locationName": {
+      "type": "string",
+      "description": "The location name to search for jobs in. This will be converted to a LinkedIn location ID using the typeahead locations API.  Do not use or include abbreviations like USA (country), LA (city), etc., and use the full name instead, like United States, Los Angeles, etc.",
+      "example": "Los Angeles, United States",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-locations",
+        "params": {
+          "keywords": "{{locationName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "locationIds.0",
+        "newKey": "locationId"
+      },
+      "required": false
+    },
+    "currentCompanyName": {
+      "type": "string",
+      "description": "Company name to filter by current company. This will be converted to a LinkedIn company ID using the typeahead companies API.",
+      "example": "Amazon",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-companies",
+        "params": {
+          "keywords": "{{currentCompanyName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "companyId.0",
+        "newKey": "currentCompanyId"
+      },
+      "required": false
+    },
+    "pastCompanyName": {
+      "type": "string",
+      "description": "Company name to filter by past company. This will be converted to a LinkedIn company ID using the typeahead companies API.",
+      "example": "Amazon",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-companies",
+        "params": {
+          "keywords": "{{pastCompanyName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "companyId.0",
+        "newKey": "pastCompanyId"
+      },
+      "required": false
+    },
+    "industryName": {
+      "type": "string",
+      "description": "Industry name to filter by. This will be converted to a LinkedIn industry ID using the typeahead industries API.",
+      "example": "Software Engineering",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-industries",
+        "params": {
+          "keywords": "{{industryName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "industryId.0",
+        "newKey": "industryId"
+      },
+      "required": false
+    },
+    "network": {
+      "type": "string",
+      "description": "Network filter (e.g., F for 1st degree connections, S for 2nd degree connections, O for all connections).",
+      "example": "O"
+    },
+    "connectionOf": {
+      "type": "string",
+      "description": "Person name to find connections of. This will be converted to a LinkedIn person ID using the typeahead people API.",
+      "example": "Shuo Feng",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-people",
+        "params": {
+          "keywords": "{{connectionOf}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "peopleHashId.0"
+      },
+      "required": false
+    },
+    "followerOf": {
+      "type": "string",
+      "description": "Person name to find followers of. This will be converted to a LinkedIn person ID using the typeahead people API.",
+      "example": "Shuo Feng",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-people",
+        "params": {
+          "keywords": "{{followerOf}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "peopleHashId.0"
+      },
+      "required": false
+    },
+    "openToVolunteer": {
+      "type": "boolean",
+      "description": "Whether to filter for people open to volunteering.",
+      "example": true,
+      "required": false
+    },
+    "profileLanguage": {
+      "type": "string",
+      "description": "Preferred profile language. E.g., en, es, zh.",
+      "example": "en",
+      "required": false
+    },
+    "schoolName": {
+      "type": "string",
+      "description": "School name to filter by. This will be converted to a LinkedIn school ID using the typeahead schools API.",
+      "example": "University of Southern California",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-schools",
+        "params": {
+          "keywords": "{{schoolName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "schoolId.0",
+        "newKey": "schoolId"
+      },
+      "required": false
+    },
+    "serviceCategoryName": {
+      "type": "string",
+      "description": "Service category name to filter by. This will be converted to a LinkedIn service category ID using the typeahead service categories API.",
+      "example": "Software Development",
+      "preprocess": {
+        "endpoint": "/linkedin.com/single-step/typeahead-service-categories",
+        "params": {
+          "keywords": "{{serviceCategoryName}}",
+          "queryId": "voyagerSearchDashReusableTypeahead.35c83322e303eeb7ced9eb48e83a165c"
+        },
+        "return": "serviceCategoryId.0",
+        "newKey": "serviceCategoryId"
+      },
+      "required": false
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Filter by first name.",
+      "example": "Shuo",
+      "required": false
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Filter by last name.",
+      "example": "Feng",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "description": "Filter by job title.",
+      "example": "Software Engineer",
+      "required": false
+    },
+    "company": {
+      "type": "string",
+      "description": "Filter by company name.",
+      "example": "Rexpand",
+      "required": false
+    },
+    "school": {
+      "type": "string",
+      "description": "Filter by school name.",
+      "example": "University of Southern California",
+      "required": false
+    },
+    "start": {
+      "type": "number",
+      "description": "The starting index for pagination.",
+      "example": 0,
+      "default": 0,
+      "required": false
+    }
+  },
+  "request": {
+    "name": "SearchPeople",
+    "description": "Searches for people based on various filters and criteria.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryStringBuilder": "{{linkedin.com/search-people.buildSearchPeopleQueryString()}}",
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingJs": {
+      "code": "const isValidElement = (elements) => { try { for (const item of elements.items) { if (item.item.entityResult.trackingUrn.includes(\"urn:li:member:\")) { return true; } } return false; } catch { return false; }};const result = [];for (const element of response.body.data.searchDashClustersByAll.elements) { if (isValidElement(element)) { for (const item of element.items) { const entityResult = item.item.entityResult; if (!entityResult) { continue; } const memberId = entityResult.trackingUrn?.replace(\"urn:li:member:\", \"\"); const hashId = entityResult.entityUrn ?.split(\"urn:li:fsd_profile:\")[1] ?.split(\",\")[0]; const memberDistance = entityResult.entityCustomTrackingInfo?.memberDistance; const name = entityResult.title?.text; const headline = entityResult.primarySubtitle?.text; const summary = entityResult.summary?.text; const location = entityResult.secondarySubtitle?.text; const profileUrl = entityResult.navigationUrl.split(\"?\")[0]; const publicId = profileUrl.replace(\"https://www.linkedin.com/in/\", \"\"); const insights = entityResult.insightsResolutionResults?.[0]?.simpleInsight?.title?.text; result.push({ memberId, hashId, publicId, memberDistance, name, headline, summary, location, profileUrl, insights, }); } }}return result;"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "linkedin.com/single-step/search-companies",
+  "params": {
+    "keywords": {
+      "type": "string",
+      "description": "The search keywords for company search.",
+      "example": "Amazon"
+    },
+    "start": {
+      "type": "number",
+      "description": "The starting index for pagination.",
+      "example": 0
+    },
+    "queryId": {
+      "type": "string",
+      "description": "The query ID for the search companies API.",
+      "example": "voyagerSearchDashClusters.994bf4e7d2173b92ccdb5935710c3c5d",
+      "default": "voyagerSearchDashClusters.994bf4e7d2173b92ccdb5935710c3c5d"
+    }
+  },
+  "request": {
+    "name": "SearchCompanies",
+    "description": "Searches for companies based on keywords.",
+    "method": "GET",
+    "domain": "https://www.linkedin.com",
+    "endpoint": "/voyager/api/graphql",
+    "queryParameters": {
+      "variables": "(start:{{start}},origin:GLOBAL_SEARCH_HEADER,query:(keywords:{{keywords}},flagshipSearchIntent:SEARCH_SRP,queryParameters:List((key:resultType,value:List(COMPANIES))),includeFiltersInResponse:false))",
+      "queryId": "{{queryId}}"
+    },
+    "headers": {
+      "csrf-token": "{{cs_jsonParse(cookies.JSESSIONID)}}"
+    },
+    "queryTab": {
+      "url": "*://*.linkedin.com/*"
+    },
+    "requestInitiator": "tab",
+    "requestMethodType": "fetch"
+  },
+  "response": {
+    "successfulStatusCodes": [200],
+    "parsingJs": {
+      "code": "const isCompanyElement = (element) => {\n  return !!element?.items[0]?.item?.entityResult?.trackingUrn;\n};\n\nconst elements = response.body.data.searchDashClustersByAll.elements;\nlet companies = [];\n\nfor (const element of elements) {\n  if (isCompanyElement(element)) {\n    companies = element.items;\n    break;\n  }\n}\n\nif (!companies.length) {\n  return [];\n}\n\nconst result = companies.map(({ item }) => {\n  const { entityResult } = item;\n\n  return {\n    companyId: entityResult?.trackingUrn?.replace(\"urn:li:company:\", \"\"),\n    companyName: entityResult?.title?.text,\n    companyLocation: entityResult?.primarySubtitle?.text,\n    companyDescription: entityResult?.summary?.text,\n    companyFollowers: entityResult?.secondarySubtitle?.text?.replace(\n      \" students and alumni on LinkedIn\",\n      \"\"\n    ),\n    companyInsight1:\n      entityResult?.insightsResolutionResults[0]?.simpleInsight?.title?.text ||\n      \"\",\n    companyInsight2:\n      entityResult?.insightsResolutionResults[1]?.simpleInsight?.title?.text ||\n      \"\",\n    companyUrl: entityResult?.navigationUrl,companyPublicId: entityResult?.navigationUrl.replace(\"https://www.linkedin.com/company/\",\"\").replace(\"/\", \"\"),\n  };\n});\n\nreturn result;"
+    }
+  }
+}
