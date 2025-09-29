@@ -9,8 +9,8 @@
     "queryId": {
       "type": "string",
       "description": "The ID of the query to fetch details for.",
-      "example": "voyagerIdentityDashProfiles.13618f886ce95bf503079f49245fbd6f",
-      "default": "voyagerIdentityDashProfiles.13618f886ce95bf503079f49245fbd6f"
+      "example": "voyagerIdentityDashProfiles.34ead06db82a2cc9a778fac97f69ad6a",
+      "default": "voyagerIdentityDashProfiles.34ead06db82a2cc9a778fac97f69ad6a"
     }
   },
   "request": {
@@ -20,7 +20,7 @@
     "domain": "https://www.linkedin.com",
     "endpoint": "/voyager/api/graphql",
     "queryParameters": {
-      "variables": "(memberIdentity:{{publicIdOrHashId}})",
+      "variables": "(vanityName:{{publicIdOrHashId}})",
       "queryId": "{{queryId}}"
     },
     "headers": {
